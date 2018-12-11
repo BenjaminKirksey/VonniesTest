@@ -1,22 +1,98 @@
 package vonnie.vonniestest.furnace;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
-public class TileFastFurnace extends TileEntity  {
+import javax.annotation.Nonnull;
+
+public class TileFastFurnace extends TileEntity implements ITickable {
 
     public static final int INPUT_SLOTS = 3;
     public static final int OUTPUT_SLOTS = 6;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
 
+    public static final int MAX_PROGRESS = 40;
+
+    private int progress = 0;
+
+
+    @Override
+    public void update() {
+        if (!world.isRemote) {
+            if (progress > 0) {
+                progress--;
+                if (progress <= 0) {
+                    attemptSmelt();
+                }
+                markDirty();
+            } else {
+                startSmelt();
+            }
+        }
+    }
+
+    private boolean insertOutput(ItemStack output, boolean simulate) {
+        for (int i = 0 ; i < OUTPUT_SLOTS ; i++) {
+            ItemStack remaining = outputHandler.insertItem(i, output, simulate);
+            if (remaining.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void startSmelt() {
+        for (int i = 0 ; i < INPUT_SLOTS ; i++) {
+            ItemStack result = FurnaceRecipes.instance().getSmeltingResult(inputHandler.getStackInSlot(i));
+            if (!result.isEmpty()) {
+                if (insertOutput(result.copy(), true)) {
+                    progress = MAX_PROGRESS;
+                    markDirty();
+                }
+                break;
+            }
+        }
+    }
+    private void attemptSmelt() {
+        for (int i = 0 ; i < INPUT_SLOTS ; i++) {
+            ItemStack result = FurnaceRecipes.instance().getSmeltingResult(inputHandler.getStackInSlot(i));
+            if (!result.isEmpty()) {
+                //This copy is very important!
+                if (insertOutput(result.copy(), false)) {
+                    inputHandler.extractItem(i, 1, false);
+                    break;
+                }
+            }
+        }
+    }
+
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
     // This item handler will hold our three input slots
     private ItemStackHandler inputHandler = new ItemStackHandler(INPUT_SLOTS) {
+
+        @Override
+        public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+            ItemStack result = FurnaceRecipes.instance().getSmeltingResult(stack);
+            return !result.isEmpty();
+        }
+
         @Override
         protected void onContentsChanged(int slot) {
             // We need to tell the tile entity that something has changed so
@@ -45,6 +121,7 @@ public class TileFastFurnace extends TileEntity  {
         }        if (compound.hasKey("itemsOut")) {
             outputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsOut"));
         }
+        progress = compound.getInteger("progress");
     }
 
     @Override
@@ -52,6 +129,7 @@ public class TileFastFurnace extends TileEntity  {
         super.writeToNBT(compound);
         compound.setTag("itemsIn", inputHandler.serializeNBT());
         compound.setTag("itemsOut", outputHandler.serializeNBT());
+        compound.setInteger("progress", progress);
         return compound;
     }
     public boolean canInteractWith(EntityPlayer playerIn) {
