@@ -2,16 +2,23 @@ package vonnie.vonniestest.furnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import java.util.List;
+
 public class ContainerFastFurnace extends Container {
 
     private TileFastFurnace te;
+
+    private static final int PROGRESS_ID = 0;
 
     public ContainerFastFurnace(IInventory playerInventory, TileFastFurnace te) {
         this.te = te;
@@ -48,18 +55,25 @@ public class ContainerFastFurnace extends Container {
 
         int slotIndex = 0;
 
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y)); x += 18;
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y)); x += 18;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+        x += 18;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+        x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
 
         x = 116;
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y)); x += 18;
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y)); x += 18;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+        x += 18;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+        x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
 
-        x = 116; y = 44;
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y)); x += 18;
-        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y)); x += 18;
+        x = 116;
+        y = 44;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+        x += 18;
+        addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
+        x += 18;
         addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex++, x, y));
     }
 
@@ -93,5 +107,20 @@ public class ContainerFastFurnace extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return te.canInteractWith(playerIn);
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+        for (IContainerListener listener : listeners) {
+            listener.sendWindowProperty(this, PROGRESS_ID, te.getProgress());
+        }
+    }
+
+    @Override
+    public void updateProgressBar(int id, int data) {
+        if (id == PROGRESS_ID) {
+            te.setProgress(data);
+        }
     }
 }
