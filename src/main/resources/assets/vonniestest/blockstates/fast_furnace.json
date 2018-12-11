@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube",
+    "textures": {
+      "north": "vonniestest:blocks/fast_furnace",
+      "south": "vonniestest:blocks/side",
+      "west": "vonniestest:blocks/side",
+      "east": "vonniestest:blocks/side",
+      "up": "vonniestest:blocks/top",
+      "down": "vonniestest:blocks/bottom"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "facing": {
+      "north": {},
+      "south": {"y":  180},
+      "west": {"y": 270},
+      "east": {"y": 90},
+      "up": {"x": -90},
+      "down": {"x": 90}
+    }
+  }
+}

@@ -1,0 +1,15 @@
+[
+{
+  "modid": "vonniestest",
+  "name": "My Test Mod",
+  "description": "Just a lame test Mod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "None ATM",
+  "updateUrl": "",
+  "authorList": ["Vonnie"],
+  "credits": "Vonnie",
+  "logoFile": "",
+  "screenshots": []
+}
+]

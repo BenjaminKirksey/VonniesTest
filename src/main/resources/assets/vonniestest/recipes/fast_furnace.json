@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "vonniestest:fast_furnace"
+  },
+  "pattern": [
+    " c ",
+    "cFc",
+    "cRc"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {
+      "type": "forge:ore_dict", "ore": "ingotIron"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  }
+}
