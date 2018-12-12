@@ -22,19 +22,20 @@ public class TileFastFurnace extends TileEntity implements ITickable {
     public static final int INPUT_SLOTS = 3;
     public static final int OUTPUT_SLOTS = 6;
     public static final int SIZE = INPUT_SLOTS + OUTPUT_SLOTS;
-
     public static final int MAX_PROGRESS = 40;
-
     public static final int MAX_POWER = 100000;
     public static final int RF_PER_TICK = 20;
     public static final int RF_PER_TICK_INPUT = 100;
 
     private int progress = 0;
+
     private int clientProgress = -1;
+    private int clientEnergy = -1;
 
     @Override
     public void update() {
         if (!world.isRemote) {
+
             if (energyStorage.getEnergyStored() < RF_PER_TICK) {
                 return;
             }
@@ -103,7 +104,19 @@ public class TileFastFurnace extends TileEntity implements ITickable {
         this.clientProgress = clientProgress;
     }
 
-    // ------------------------------------------------------------------------------------------------------------------
+    public int getClientEnergy() {
+        return clientEnergy;
+    }
+
+    public void setClientEnergy(int clientEnergy) {
+        this.clientEnergy = clientEnergy;
+    }
+
+    public int getEnergy() {
+        return energyStorage.getEnergyStored();
+    }
+
+// ------------------------------------------------------------------------------------------------------------------
 
     // This item handler will hold our three input slots
     private ItemStackHandler inputHandler = new ItemStackHandler(INPUT_SLOTS) {

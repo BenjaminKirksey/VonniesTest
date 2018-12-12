@@ -1,6 +1,8 @@
 package vonnie.vonniestest.proxy;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -14,11 +16,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import vonnie.vonniestest.ModBlocks;
 import vonnie.vonniestest.furnace.BlockFastFurnace;
 import vonnie.vonniestest.furnace.TileFastFurnace;
+import vonnie.vonniestest.network.Messages;
 import vonnie.vonniestest.vonniestest;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
+        Messages.registerMessages("vonniestest");
     }
 
     public void init(FMLInitializationEvent e) {
@@ -37,5 +41,12 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemBlock(ModBlocks.blockFastFurnace).setRegistryName(BlockFastFurnace.FAST_FURNACE));
+    }
+    public ListenableFuture<Object> addScheduledTaskClient (Runnable runnableToSchedule) {
+        throw new IllegalStateException("This should only be called from client side");
+    }
+
+    public EntityPlayer getClientPlayer() {
+        throw new IllegalStateException("This should only be called from client side");
     }
 }
