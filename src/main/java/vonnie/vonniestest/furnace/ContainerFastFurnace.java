@@ -103,7 +103,7 @@ public class ContainerFastFurnace extends Container {
 
         return itemstack;
     }
-    
+
 
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
