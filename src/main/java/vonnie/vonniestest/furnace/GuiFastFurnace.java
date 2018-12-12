@@ -27,7 +27,7 @@ public class GuiFastFurnace extends GuiContainer {
 
         if (furnace.getProgress() > 0) {
             int percentage = 100 - furnace.getProgress() * 100 / TileFastFurnace.MAX_PROGRESS;
-            drawString(mc.fontRenderer, "Progress: " + percentage + "%", guiLeft + 10, guiTop + 50, 0x8b8b8b);
+            drawString(mc.fontRenderer, "Progress: " + percentage + "%", guiLeft + 10, guiTop + 50, 0xffffff);
         }
     }
 
