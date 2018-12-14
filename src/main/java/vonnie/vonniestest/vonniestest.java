@@ -17,7 +17,7 @@ public class vonniestest {
 
     public static final String MODID = "vonniestest";
     public static final String MODNAME = "My Test Mod";
-    public static final String MODVERSION= "0.0.1";
+    public static final String MODVERSION= "0.0.2";
 
     @SidedProxy(clientSide = "vonnie.vonniestest.proxy.ClientProxy", serverSide = "vonnie.vonniestest.proxy.ServerProxy")
     public static CommonProxy proxy;

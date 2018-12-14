@@ -21,6 +21,12 @@
       "east": {"y": 90},
       "up": {"x": -90},
       "down": {"x": 90}
+    },
+    "state": {
+      "off": {},
+      "working": {"textures": { "north":  "vonniestest:blocks/fast_furnace_working"} },
+      "nopower": {"textures": { "north":  "vonniestest:blocks/fast_furnace_nopower", "south": "vonniestest:blocks/side_nopower", "west": "vonniestest:blocks/side_nopower", "east": "vonniestest:blocks/side_nopower"
+      } }
     }
   }
 }

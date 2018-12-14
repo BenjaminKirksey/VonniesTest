@@ -32,7 +32,7 @@ repositories {
         }       
 }
 
-version = "0.0.1"
+version = "0.0.2"
 group = "vonnie.vonniestest" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "vonniestest"
 
