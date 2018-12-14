@@ -199,9 +199,14 @@ public class TileFastFurnace extends TileEntity implements ITickable {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
+        readRestorableFromNBT(compound);
+    }
+
+    public void readRestorableFromNBT(NBTTagCompound compound) {
         if (compound.hasKey("itemsIn")) {
             inputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsIn"));
-        }        if (compound.hasKey("itemsOut")) {
+        }
+        if (compound.hasKey("itemsOut")) {
             outputHandler.deserializeNBT((NBTTagCompound) compound.getTag("itemsOut"));
         }
         progress = compound.getInteger("progress");
@@ -211,12 +216,17 @@ public class TileFastFurnace extends TileEntity implements ITickable {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
+        writeRestorableToNBT(compound);
+        return compound;
+    }
+
+    public void writeRestorableToNBT(NBTTagCompound compound) {
         compound.setTag("itemsIn", inputHandler.serializeNBT());
         compound.setTag("itemsOut", outputHandler.serializeNBT());
         compound.setInteger("progress", progress);
         compound.setInteger("energy", energyStorage.getEnergyStored());
-        return compound;
     }
+
     public boolean canInteractWith(EntityPlayer playerIn) {
         // If we are too far away from this tile entity you cannot use it
         return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;

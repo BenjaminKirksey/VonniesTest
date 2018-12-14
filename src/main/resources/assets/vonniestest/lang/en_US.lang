@@ -1,3 +1,9 @@
+#PARSE_ESCAPES
 tile.vonniestest.fast_furnace.name=Fast Furnace
 
 itemGroup.vonniestest=Test Mod
+
+message.vonniestest.fast_furnace=\
+    @aEnergy: %d\n\
+    @aItems: %d -> %d\n\
+    @fFast Furnace
