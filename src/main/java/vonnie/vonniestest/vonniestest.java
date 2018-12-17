@@ -22,9 +22,9 @@ public class vonniestest {
     @SidedProxy(clientSide = "vonnie.vonniestest.proxy.ClientProxy", serverSide = "vonnie.vonniestest.proxy.ServerProxy")
     public static CommonProxy proxy;
 
-    public static CreativeTabs creativeTab = new CreativeTabs("vonniestest") {
+    public static CreativeTabs creativeTab = new CreativeTabs( "vonniestest") {
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(ModBlocks.blockFastFurnace);
         }
     };

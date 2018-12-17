@@ -46,7 +46,7 @@ public class BlockFastFurnace extends Block implements ITileEntityProvider {
     public BlockFastFurnace() {
         super(Material.IRON);
         setRegistryName(FAST_FURNACE);
-        setUnlocalizedName(vonniestest.MODID + ".fast_furnace");
+        setTranslationKey(vonniestest.MODID + ".fast_furnace");
         setHarvestLevel("pickaxe", 1);
         setCreativeTab(vonniestest.creativeTab);
 
@@ -175,7 +175,7 @@ public class BlockFastFurnace extends Block implements ITileEntityProvider {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta & 7));
     }
 
     @Override

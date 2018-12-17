@@ -2,6 +2,7 @@ package vonnie.vonniestest.furnace;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
+import vonnie.vonniestest.config.FastFurnaceConfig;
 import vonnie.vonniestest.vonniestest;
 
 import java.util.Collections;
@@ -31,7 +32,7 @@ public class GuiFastFurnace extends GuiContainer {
         drawEnergyBar(energy);
 
         if (furnace.getClientProgress() > 0) {
-            int percentage = 100 - furnace.getClientProgress() * 100 / TileFastFurnace.MAX_PROGRESS;
+            int percentage = 100 - furnace.getClientProgress() * 100 / FastFurnaceConfig.MAX_PROGRESS;
             drawString(mc.fontRenderer, "Progress: " + percentage + "%", guiLeft + 10, guiTop + 50, 0xffffff);
         }
     }
@@ -49,7 +50,7 @@ public class GuiFastFurnace extends GuiContainer {
 
     private void drawEnergyBar(int energy) {
         drawRect(guiLeft + 7, guiTop + 7, guiLeft + 109, guiTop + 17, 0xff555555);
-        int percentage = energy * 100 / TileFastFurnace.MAX_POWER;
+        int percentage = energy * 100 / FastFurnaceConfig.MAX_POWER;
         for (int i = 0 ; i < percentage ; i++) {
             drawVerticalLine(guiLeft + 7 + 1 + i, guiTop + 7, guiTop + 16, i % 2 == 0 ? 0xffff0000 : 0xff000000);
        }
