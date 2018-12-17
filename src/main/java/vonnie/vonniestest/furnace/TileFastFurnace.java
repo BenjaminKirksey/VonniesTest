@@ -50,7 +50,6 @@ public class TileFastFurnace extends TileEntity implements ITickable {
                 }
                 markDirty();
             } else {
-                setState(FurnaceState.OFF);
                 startSmelt();
             }
         }
@@ -71,12 +70,14 @@ public class TileFastFurnace extends TileEntity implements ITickable {
             ItemStack result = FurnaceRecipes.instance().getSmeltingResult(inputHandler.getStackInSlot(i));
             if (!result.isEmpty()) {
                 if (insertOutput(result.copy(), true)) {
+                    setState(FurnaceState.WORKING);
                     progress = FastFurnaceConfig.MAX_PROGRESS;
                     markDirty();
+                    return;
                 }
-                break;
             }
         }
+        setState(FurnaceState.OFF);
     }
     private void attemptSmelt() {
         for (int i = 0 ; i < INPUT_SLOTS ; i++) {
@@ -197,6 +198,7 @@ public class TileFastFurnace extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         readRestorableFromNBT(compound);
+        state = FurnaceState.VALUES[compound.getInteger("state")];
     }
 
     public void readRestorableFromNBT(NBTTagCompound compound) {
@@ -214,6 +216,7 @@ public class TileFastFurnace extends TileEntity implements ITickable {
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         writeRestorableToNBT(compound);
+        compound.setInteger("state", state.ordinal());
         return compound;
     }
 

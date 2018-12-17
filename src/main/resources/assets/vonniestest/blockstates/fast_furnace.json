@@ -3,6 +3,7 @@
   "defaults": {
     "model": "cube",
     "textures": {
+      "particle": "vonniestest:blocks/fast_furnace",
       "north": "vonniestest:blocks/fast_furnace",
       "south": "vonniestest:blocks/side",
       "west": "vonniestest:blocks/side",
