@@ -18,6 +18,7 @@ import vonnie.vonniestest.furnace.BlockFastFurnace;
 import vonnie.vonniestest.furnace.TileFastFurnace;
 import vonnie.vonniestest.network.Messages;
 import vonnie.vonniestest.vonniestest;
+import vonnie.vonniestest.worldgen.BlockTurquoiseOre;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
@@ -36,11 +37,22 @@ public class CommonProxy {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(new BlockFastFurnace());
         GameRegistry.registerTileEntity(TileFastFurnace.class, vonniestest.MODID + "_fast_furnace");
+        event.getRegistry().register(new BlockTurquoiseOre());
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemBlock(ModBlocks.blockFastFurnace).setRegistryName(BlockFastFurnace.FAST_FURNACE));
+        event.getRegistry().register(
+                new ItemBlock(ModBlocks.blockTurquoiseOre) {
+                    @Override
+                    public int getMetadata(int damage) {
+                        return damage;
+                    }
+                }
+                        .setHasSubtypes(true)
+                        .setRegistryName(BlockTurquoiseOre.TURQUOISE_ORE));
+
     }
     public ListenableFuture<Object> addScheduledTaskClient (Runnable runnableToSchedule) {
         throw new IllegalStateException("This should only be called from client side");

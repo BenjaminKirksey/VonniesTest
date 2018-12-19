@@ -1,5 +1,6 @@
 #PARSE_ESCAPES
 tile.vonniestest.fast_furnace.name=Fast Furnace
+tile.vonniestest.turquoise_ore.name=Turquoise Ore
 
 itemGroup.vonniestest=Test Mod
 

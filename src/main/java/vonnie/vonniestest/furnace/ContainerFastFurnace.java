@@ -20,7 +20,6 @@ public class ContainerFastFurnace extends Container implements IMachineStateCont
 
     private TileFastFurnace te;
 
-    private static final int PROGRESS_ID = 0;
 
     public ContainerFastFurnace(IInventory playerInventory, TileFastFurnace te) {
         this.te = te;
