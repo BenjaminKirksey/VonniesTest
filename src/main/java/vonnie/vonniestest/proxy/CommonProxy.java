@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -19,15 +20,21 @@ import vonnie.vonniestest.furnace.TileFastFurnace;
 import vonnie.vonniestest.network.Messages;
 import vonnie.vonniestest.vonniestest;
 import vonnie.vonniestest.worldgen.BlockTurquoiseOre;
+import vonnie.vonniestest.worldgen.OreGenerator;
+import vonnie.vonniestest.worldgen.WorldTickHandler;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         Messages.registerMessages("vonniestest");
+
+        GameRegistry.registerWorldGenerator(OreGenerator.instance, 5);
+        MinecraftForge.EVENT_BUS.register(OreGenerator.instance);
     }
 
     public void init(FMLInitializationEvent e) {
         NetworkRegistry.INSTANCE.registerGuiHandler(vonniestest.instance, new GuiHandler());
+        MinecraftForge.EVENT_BUS.register(WorldTickHandler.instance);
     }
 
     public void postInit(FMLPostInitializationEvent e) {
