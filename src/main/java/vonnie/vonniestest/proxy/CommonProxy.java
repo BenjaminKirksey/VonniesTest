@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,9 +15,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import vonnie.vonniestest.ModBlocks;
+import vonnie.vonniestest.ModItems;
 import vonnie.vonniestest.furnace.BlockFastFurnace;
 import vonnie.vonniestest.furnace.TileFastFurnace;
+import vonnie.vonniestest.items.ItemTurquoiseGem;
 import vonnie.vonniestest.network.Messages;
 import vonnie.vonniestest.vonniestest;
 import vonnie.vonniestest.worldgen.BlockTurquoiseOre;
@@ -38,6 +42,8 @@ public class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent e) {
+        GameRegistry.addSmelting(ModBlocks.blockTurquoiseOre, new ItemStack(ModItems.itemTurquoiseGem, 1), 0.5f);
+        OreDictionary.registerOre("oreTurquoise", ModBlocks.blockTurquoiseOre);
     }
 
     @SubscribeEvent
@@ -59,6 +65,8 @@ public class CommonProxy {
                 }
                         .setHasSubtypes(true)
                         .setRegistryName(BlockTurquoiseOre.TURQUOISE_ORE));
+
+        event.getRegistry().register(new ItemTurquoiseGem());
 
     }
     public ListenableFuture<Object> addScheduledTaskClient (Runnable runnableToSchedule) {

@@ -2,6 +2,8 @@
 tile.vonniestest.fast_furnace.name=Fast Furnace
 tile.vonniestest.turquoise_ore.name=Turquoise Ore
 
+item.vonniestest.turquoise_gem.name=Turquoise Gem
+
 itemGroup.vonniestest=Test Mod
 
 message.vonniestest.fast_furnace=\

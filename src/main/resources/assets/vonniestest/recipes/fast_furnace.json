@@ -10,7 +10,7 @@
   "type": "forge:ore_shaped",
   "key": {
     "c": {
-      "type": "forge:ore_dict", "ore": "ingotIron"
+      "item": "vonniestest:turquoise_gem"
     },
     "F": {
       "item": "minecraft:furnace"
