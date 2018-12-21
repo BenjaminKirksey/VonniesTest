@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import vonnie.vonniestest.furnace.ContainerFastFurnace;
 import vonnie.vonniestest.furnace.GuiFastFurnace;
 import vonnie.vonniestest.furnace.TileFastFurnace;
+import vonnie.vonniestest.tools.IGuiTile;
 
 import javax.annotation.Nullable;
 
@@ -18,8 +19,8 @@ public class GuiHandler implements IGuiHandler {
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof TileFastFurnace) {
-            return new ContainerFastFurnace(player.inventory, (TileFastFurnace) te);
+        if (te instanceof IGuiTile) {
+            return ((IGuiTile) te).createContainer(player);
         }
         return null;
     }
@@ -30,9 +31,8 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof TileFastFurnace) {
-            TileFastFurnace containerTileEntity = (TileFastFurnace) te;
-            return new GuiFastFurnace(containerTileEntity, new ContainerFastFurnace(player.inventory, containerTileEntity));
+        if (te instanceof IGuiTile) {
+            return ((IGuiTile) te).createGui(player);
         }
         return null;
     }
