@@ -115,18 +115,19 @@ public class ContainerFastFurnace extends Container implements IMachineStateCont
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        if (te.getProgress() != te.getClientProgress() || te.getEnergy() != te.getClientEnergy()) {
-            te.setClientEnergy(te.getEnergy());
-            te.setClientProgress(te.getProgress());
-
-            for (IContainerListener listener : listeners) {
-                if (listener instanceof EntityPlayerMP) {
-                    EntityPlayerMP player = (EntityPlayerMP) listener;
-                    int pct = 100 - te.getProgress() * 100 / FastFurnaceConfig.MAX_PROGRESS;
-                    Messages.INSTANCE.sendTo(new PacketSyncMachineState(te.getEnergy(), pct), player);
+        if (!te.getWorld().isRemote) {
+            if (te.getProgress() != te.getClientProgress() || te.getEnergy() != te.getClientEnergy()) {
+                te.setClientEnergy(te.getEnergy());
+                te.setClientProgress(te.getProgress());
+                for (IContainerListener listener : listeners) {
+                    if (listener instanceof EntityPlayerMP) {
+                        EntityPlayerMP player = (EntityPlayerMP) listener;
+                        int pct = 100 - te.getProgress() * 100 / FastFurnaceConfig.MAX_PROGRESS;
+                        Messages.INSTANCE.sendTo(new PacketSyncMachineState(te.getEnergy(), pct), player);
+                    }
                 }
-            }
 
+            }
         }
     }
     @Override
