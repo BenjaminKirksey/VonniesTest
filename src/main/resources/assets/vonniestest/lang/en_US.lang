@@ -1,5 +1,6 @@
 #PARSE_ESCAPES
 tile.vonniestest.fast_furnace.name=Fast Furnace
+tile.vonniestest.generator.name=Generator
 tile.vonniestest.turquoise_ore.name=Turquoise Ore
 
 item.vonniestest.turquoise_gem.name=Turquoise Gem
@@ -10,3 +11,7 @@ message.vonniestest.fast_furnace=\
     @aEnergy: %d\n\
     @aItems: %d -> %d\n\
     @fFast Furnace
+
+message.vonniestest.generator=\
+    @aEnergy: %d\n\
+    @fPower Generator

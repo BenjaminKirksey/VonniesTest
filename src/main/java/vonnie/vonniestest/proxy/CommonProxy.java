@@ -48,26 +48,12 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(new BlockFastFurnace());
-        GameRegistry.registerTileEntity(TileFastFurnace.class, vonniestest.MODID + "_fast_furnace");
-        event.getRegistry().register(new BlockTurquoiseOre());
+        ModBlocks.register(event.getRegistry());
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new ItemBlock(ModBlocks.blockFastFurnace).setRegistryName(BlockFastFurnace.FAST_FURNACE));
-        event.getRegistry().register(
-                new ItemBlock(ModBlocks.blockTurquoiseOre) {
-                    @Override
-                    public int getMetadata(int damage) {
-                        return damage;
-                    }
-                }
-                        .setHasSubtypes(true)
-                        .setRegistryName(BlockTurquoiseOre.TURQUOISE_ORE));
-
-        event.getRegistry().register(new ItemTurquoiseGem());
-
+        ModItems.register(event.getRegistry());
     }
     public ListenableFuture<Object> addScheduledTaskClient (Runnable runnableToSchedule) {
         throw new IllegalStateException("This should only be called from client side");
