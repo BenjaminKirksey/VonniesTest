@@ -1,5 +1,6 @@
 package vonnie.vonniestest.generator;
 
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -7,12 +8,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.model.animation.CapabilityAnimation;
+import net.minecraftforge.common.model.animation.IAnimationStateMachine;
 import net.minecraftforge.energy.CapabilityEnergy;
 import vonnie.vonniestest.config.GeneratorConfig;
 import vonnie.vonniestest.tools.IGuiTile;
 import vonnie.vonniestest.tools.IRestorableTileEntitiy;
 import vonnie.vonniestest.tools.MyEnergyStorage;
+import vonnie.vonniestest.vonniestest;
 
 import javax.annotation.Nullable;
 
@@ -20,16 +25,17 @@ public class TileGenerator extends TileEntity implements ITickable, IRestorableT
     @Override
     public void update() {
         if (!world.isRemote) {
-
         }
     }
 
-    //---------------------------------------------------------------------------------------------------------------
+    @Nullable
+    private final IAnimationStateMachine asm;
+
+    public TileGenerator() {
+        asm = vonniestest.proxy.load(new ResourceLocation(vonniestest.MODID, "asms/block/generator.json"), ImmutableMap.of());
+    }
 
     private MyEnergyStorage energyStorage = new MyEnergyStorage(GeneratorConfig.MAX_POWER, 0);
-
-    //---------------------------------------------------------------------------------------------------------------
-
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -70,8 +76,11 @@ public class TileGenerator extends TileEntity implements ITickable, IRestorableT
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {
+            return true;
+        }
+        if (capability == CapabilityAnimation.ANIMATION_CAPABILITY) {
             return true;
         }
         return super.hasCapability(capability, facing);
@@ -81,6 +90,9 @@ public class TileGenerator extends TileEntity implements ITickable, IRestorableT
     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {
             return CapabilityEnergy.ENERGY.cast(energyStorage);
+        }
+        if (capability == CapabilityAnimation.ANIMATION_CAPABILITY) {
+            return CapabilityAnimation.ANIMATION_CAPABILITY.cast(asm);
         }
         return super.getCapability(capability, facing);
     }
