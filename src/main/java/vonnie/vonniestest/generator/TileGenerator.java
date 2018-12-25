@@ -76,6 +76,11 @@ public class TileGenerator extends TileEntity implements ITickable, IRestorableT
     }
 
     @Override
+    public boolean hasFastRenderer() {
+        return true;
+    }
+
+    @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) {
             return true;
