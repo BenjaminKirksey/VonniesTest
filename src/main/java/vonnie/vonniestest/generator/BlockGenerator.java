@@ -39,6 +39,8 @@ public class BlockGenerator extends GenericBlock implements ITileEntityProvider 
         setRegistryName(GENERATOR);
         setTranslationKey(vonniestest.MODID + ".generator");
         setHarvestLevel("pickaxe", 1);
+        setHardness(4.0f);
+        setResistance(5.0f);
 
 
         setDefaultState(blockState.getBaseState().withProperty(FACING_HORIZ, EnumFacing.NORTH));

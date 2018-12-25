@@ -50,6 +50,9 @@ public class BlockFastFurnace extends GenericBlock implements ITileEntityProvide
         setRegistryName(FAST_FURNACE);
         setTranslationKey(vonniestest.MODID + ".fast_furnace");
         setHarvestLevel("pickaxe", 1);
+        setHardness(4.0f);
+        setResistance(5.0f);
+
 
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
