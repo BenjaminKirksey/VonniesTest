@@ -41,7 +41,7 @@ public class BlockGenerator extends GenericBlock implements ITileEntityProvider 
         setHarvestLevel("pickaxe", 1);
         setHardness(4.0f);
         setResistance(5.0f);
-
+        setLightOpacity(0);
 
         setDefaultState(blockState.getBaseState().withProperty(FACING_HORIZ, EnumFacing.NORTH));
     }
