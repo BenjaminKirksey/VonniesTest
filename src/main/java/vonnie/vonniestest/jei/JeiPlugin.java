@@ -24,7 +24,7 @@ public class JeiPlugin implements IModPlugin {
         IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
         registry.addRecipeClickArea(GuiFastFurnace.class, 75,25,25,25,VanillaRecipeCategoryUid.SMELTING);
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.blockFastFurnace), VanillaRecipeCategoryUid.SMELTING);
-        recipeTransferRegistry.addRecipeTransferHandler(ContainerFastFurnace.class, VanillaRecipeCategoryUid.SMELTING, 0,3,10,35);
+        recipeTransferRegistry.addRecipeTransferHandler(ContainerFastFurnace.class, VanillaRecipeCategoryUid.SMELTING, 0,3,9,36);
         IIngredientBlacklist ingredientBlacklist = registry.getJeiHelpers().getIngredientBlacklist();
         // Game freezes when loading player skulls, see https://bugs.mojang.com/browse/MC-65587
         ingredientBlacklist.addIngredientToBlacklist(new ItemStack(Items.SKULL, 1, 3));
