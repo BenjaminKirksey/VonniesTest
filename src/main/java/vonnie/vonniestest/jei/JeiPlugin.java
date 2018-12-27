@@ -20,7 +20,7 @@ public class JeiPlugin implements IModPlugin {
         IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
         registry.addRecipeClickArea(GuiFastFurnace.class, 75,25,25,25,VanillaRecipeCategoryUid.SMELTING);
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.blockFastFurnace), VanillaRecipeCategoryUid.SMELTING);
-        recipeTransferRegistry.addRecipeTransferHandler(ContainerFastFurnace.class, VanillaRecipeCategoryUid.SMELTING, 0,3,9,36);
+        recipeTransferRegistry.addRecipeTransferHandler(ContainerFastFurnace.class, VanillaRecipeCategoryUid.SMELTING, 0,1,9,36);
     }
 
 }
