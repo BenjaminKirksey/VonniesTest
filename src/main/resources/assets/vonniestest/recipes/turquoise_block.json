@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "vonniestest:turquoise_block"
+  },
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {
+      "item": "vonniestest:turquoise_gem"
+    }
+  }
+}

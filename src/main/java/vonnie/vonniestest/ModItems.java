@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import vonnie.vonniestest.blocks.BlockTurquoise;
 import vonnie.vonniestest.furnace.BlockFastFurnace;
 import vonnie.vonniestest.generator.BlockGenerator;
 import vonnie.vonniestest.items.ItemTurquoiseGem;
@@ -22,6 +23,7 @@ public class ModItems {
     public static void register(IForgeRegistry<Item> registry) {
         registry.register(new ItemBlock(ModBlocks.blockFastFurnace).setRegistryName(BlockFastFurnace.FAST_FURNACE));
         registry.register(new ItemBlock(ModBlocks.blockGenerator).setRegistryName(BlockGenerator.GENERATOR));
+        registry.register(new ItemBlock(ModBlocks.blockTurquoise).setRegistryName(BlockTurquoise.TURQUOISE_BLOCK));
         registry.register(new ItemBlock(ModBlocks.blockTurquoiseOre) {
             @Override
             public int getMetadata(int damage) {
