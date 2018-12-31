@@ -5,6 +5,8 @@ import net.minecraft.util.ResourceLocation;
 import vonnie.vonniestest.config.GeneratorConfig;
 import vonnie.vonniestest.vonniestest;
 
+import java.util.Collections;
+
 public class GuiGenerator extends GuiContainer {
 
     public static final int WIDTH = 180;
@@ -27,12 +29,8 @@ public class GuiGenerator extends GuiContainer {
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        int energy = 0; //generator.getClientEnergy();
-        drawEnergyBar(energy);/*
-        if (generator.getClientProgress() > 0) {
-            int percentage = generator.getClientProgress();
-            drawString(mc.fontRenderer, "Progress: " + percentage + "%", guiLeft + 10, guiTop + 50, 0xffffff);
-        }*/
+        int energy = generator.getClientEnergy();
+        drawEnergyBar(energy);
     }
 
     @Override
@@ -42,7 +40,7 @@ public class GuiGenerator extends GuiContainer {
         renderHoveredToolTip(mouseX, mouseY);
 
         if (mouseX > guiLeft + 10 && mouseX < guiLeft + 112 && mouseY > guiTop + 5 && mouseY < guiTop + 15) {
-//            drawHoveringText(Collections.singletonList("Energy: " + generator.getClientEnergy()), mouseX, mouseY, fontRenderer);
+            drawHoveringText(Collections.singletonList("Energy: " + generator.getClientEnergy()), mouseX, mouseY, fontRenderer);
         }
     }
 
