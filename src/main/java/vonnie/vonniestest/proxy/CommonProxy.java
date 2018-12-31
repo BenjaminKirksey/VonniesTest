@@ -24,6 +24,8 @@ import vonnie.vonniestest.ModBlocks;
 import vonnie.vonniestest.ModItems;
 import vonnie.vonniestest.furnace.BlockFastFurnace;
 import vonnie.vonniestest.furnace.TileFastFurnace;
+import vonnie.vonniestest.generator.DamageTracker;
+import vonnie.vonniestest.generator.FishingTracker;
 import vonnie.vonniestest.items.ItemTurquoiseGem;
 import vonnie.vonniestest.network.Messages;
 import vonnie.vonniestest.vonniestest;
@@ -45,6 +47,8 @@ public class CommonProxy {
     public void init(FMLInitializationEvent e) {
         NetworkRegistry.INSTANCE.registerGuiHandler(vonniestest.instance, new GuiHandler());
         MinecraftForge.EVENT_BUS.register(WorldTickHandler.instance);
+        MinecraftForge.EVENT_BUS.register(FishingTracker.instance);
+        MinecraftForge.EVENT_BUS.register(DamageTracker.instance);
     }
 
     public void postInit(FMLPostInitializationEvent e) {
