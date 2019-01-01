@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import vonnie.vonniestest.ModBlocks;
+import vonnie.vonniestest.ModEntities;
 import vonnie.vonniestest.ModItems;
 import vonnie.vonniestest.vonniestest;
 
@@ -32,6 +33,7 @@ public class ClientProxy extends CommonProxy {
     public static void registerModels(ModelRegistryEvent event) {
         ModBlocks.initModels();
         ModItems.initModels();
+        ModEntities.initModels();
     }
 
     @Override

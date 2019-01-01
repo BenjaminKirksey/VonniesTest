@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import vonnie.vonniestest.ModBlocks;
+import vonnie.vonniestest.ModEntities;
 import vonnie.vonniestest.ModItems;
 import vonnie.vonniestest.generator.DamageTracker;
 //import vonnie.vonniestest.generator.FishingTracker;
@@ -32,11 +33,13 @@ import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
+
     public void preInit(FMLPreInitializationEvent e) {
         Messages.registerMessages("vonniestest");
-
         GameRegistry.registerWorldGenerator(OreGenerator.instance, 5);
         MinecraftForge.EVENT_BUS.register(OreGenerator.instance);
+
+        ModEntities.init();
     }
 
     public void init(FMLInitializationEvent e) {

@@ -6,6 +6,8 @@ tile.vonniestest.turquoise_block.name=Turquoise Block
 
 item.vonniestest.turquoise_gem.name=Turquoise Gem
 
+entity.vonniestest_guard.name=Guard
+
 itemGroup.vonniestest=Test Mod
 
 message.vonniestest.fast_furnace=\
