@@ -10,6 +10,7 @@ import vonnie.vonniestest.blocks.BlockTurquoise;
 import vonnie.vonniestest.furnace.BlockFastFurnace;
 import vonnie.vonniestest.generator.BlockGenerator;
 import vonnie.vonniestest.items.ItemTurquoiseGem;
+import vonnie.vonniestest.puzzle.BlockPuzzle;
 import vonnie.vonniestest.worldgen.BlockTurquoiseOre;
 
 public class ModItems {
@@ -23,6 +24,7 @@ public class ModItems {
     public static void register(IForgeRegistry<Item> registry) {
         registry.register(new ItemBlock(ModBlocks.blockFastFurnace).setRegistryName(BlockFastFurnace.FAST_FURNACE));
         registry.register(new ItemBlock(ModBlocks.blockGenerator).setRegistryName(BlockGenerator.GENERATOR));
+        registry.register(new ItemBlock(ModBlocks.blockPuzzle).setRegistryName(BlockPuzzle.PUZZLE));
         registry.register(new ItemBlock(ModBlocks.blockTurquoise).setRegistryName(BlockTurquoise.TURQUOISE_BLOCK));
         registry.register(new ItemBlock(ModBlocks.blockTurquoiseOre) {
             @Override

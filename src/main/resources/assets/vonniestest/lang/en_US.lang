@@ -3,6 +3,7 @@ tile.vonniestest.fast_furnace.name=Fast Furnace
 tile.vonniestest.generator.name=Generator
 tile.vonniestest.turquoise_ore.name=Turquoise Ore
 tile.vonniestest.turquoise_block.name=Turquoise Block
+tile.vonniestest.puzzle.name=Puzzle Block
 
 item.vonniestest.turquoise_gem.name=Turquoise Gem
 
