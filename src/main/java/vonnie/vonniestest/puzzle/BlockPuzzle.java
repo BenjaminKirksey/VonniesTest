@@ -48,7 +48,7 @@ public class BlockPuzzle extends GenericBlock implements ITileEntityProvider {
         ClientRegistry.bindTileEntitySpecialRenderer(TilePuzzle.class, new PuzzleTESR());
     }
 
-
+    @SideOnly(Side.CLIENT)
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {

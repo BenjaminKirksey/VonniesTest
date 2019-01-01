@@ -22,6 +22,8 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.property.Properties;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vonnie.vonniestest.tools.GenericBlock;
 import vonnie.vonniestest.vonniestest;
 
@@ -76,6 +78,7 @@ public class BlockGenerator extends GenericBlock implements ITileEntityProvider 
         return false;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void initModel() {
         super.initModel();
