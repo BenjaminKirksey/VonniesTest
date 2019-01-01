@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityFishHook;
+//import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -51,7 +51,7 @@ public class TileGenerator extends TileEntity implements ITickable, IRestorableT
             if (trackCounter <= 0) {
                 trackCounter = 20;
                 findEntitiesDamage();
-                findEntitiesFishing();
+                //findEntitiesFishing();
             }
 
             sendEnergy();
@@ -62,7 +62,7 @@ public class TileGenerator extends TileEntity implements ITickable, IRestorableT
     public void invalidate() {
         super.invalidate();
         DamageTracker.instance.removeDamage(world.provider.getDimension(), pos);
-        FishingTracker.instance.removeFishing(world.provider.getDimension(), pos);
+        //FishingTracker.instance.removeFishing(world.provider.getDimension(), pos);
     }
 
     private void sendEnergy() {
@@ -103,14 +103,14 @@ public class TileGenerator extends TileEntity implements ITickable, IRestorableT
             DamageTracker.instance.registerDamage(world.provider.getDimension(), pos, entity.getUniqueID());
         }
     }
-    private void findEntitiesFishing(){
+/*    private void findEntitiesFishing(){
         FishingTracker.instance.clearFishing(world.provider.getDimension(), pos);
 
         List<EntityFishHook> entitiesFishing = world.getEntitiesWithinAABB(EntityFishHook.class, getTrackingBox());
         for (EntityFishHook entity : entitiesFishing) {
             DamageTracker.instance.registerDamage(world.provider.getDimension(), pos, entity.getUniqueID());
         }
-    }
+    }*/
 
     private AxisAlignedBB getTrackingBox() {
         if (trackingBox == null) {
@@ -124,11 +124,11 @@ public class TileGenerator extends TileEntity implements ITickable, IRestorableT
             energyStorage.generatePower((int) (amount * GeneratorConfig.POWER_DAMAGE_FACTOR));
         }
     }
-    public void senseFishing(EntityFishHook entity, float amount) {
+/*    public void senseFishing(EntityFishHook entity, float amountFish) {
         if (getTrackingBox().contains(entity.getPositionVector())) {
-            energyStorage.generatePower((int) (amount * GeneratorConfig.POWER_FISHING_FACTOR));
+            energyStorage.generatePower((int) (amountFish * GeneratorConfig.POWER_FISHING_FACTOR));
         }
-    }
+    }*/
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);

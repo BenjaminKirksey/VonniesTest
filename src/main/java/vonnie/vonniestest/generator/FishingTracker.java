@@ -1,4 +1,4 @@
-package vonnie.vonniestest.generator;
+/*package vonnie.vonniestest.generator;
 
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.tileentity.TileEntity;
@@ -46,18 +46,21 @@ public class FishingTracker {
 
     @SubscribeEvent
     public void onFish(ItemFishedEvent event) {
-        float amount = event.getRodDamage();
+        int amountFish = event.getRodDamage();
         EntityFishHook entity = event.getHookEntity();
         World world = entity.world;
         int dimension = world.provider.getDimension();
-        if (amount > 0 && tracking.containsKey(dimension)) {
+        System.out.println("The dimension is " + dimension);
+        System.out.println("The rod damage is " + amountFish);
+
+        if (amountFish > 0 && tracking.containsKey(dimension)) {
             Map<BlockPos, Set<UUID>> dimensionTracking = tracking.get(dimension);
             for (Map.Entry<BlockPos, Set<UUID>> entry : dimensionTracking.entrySet()) {
                 if (entry.getValue().contains(entity.getUniqueID())){
                     if (world.isBlockLoaded(entry.getKey())) {
                         TileEntity tileEntity = world.getTileEntity(entry.getKey());
                         if (tileEntity instanceof TileGenerator) {
-                            ((TileGenerator) tileEntity).senseFishing(entity, amount);
+                            ((TileGenerator) tileEntity).senseFishing(entity, amountFish);
                         }
                     }
                 }
@@ -67,3 +70,4 @@ public class FishingTracker {
 
     }
 }
+*/

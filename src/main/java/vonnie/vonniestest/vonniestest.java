@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.Logger;
 import vonnie.vonniestest.generator.DamageTracker;
-import vonnie.vonniestest.generator.FishingTracker;
+//import vonnie.vonniestest.generator.FishingTracker;
 import vonnie.vonniestest.proxy.CommonProxy;
 
 @Mod(modid = vonniestest.MODID, name = vonniestest.MODNAME, version = vonniestest.MODVERSION, dependencies = "required-after:forge@[11.16.0.1865,)", useMetadata = true)
@@ -53,12 +53,12 @@ public class vonniestest {
     @Mod.EventHandler
     public void serverStarted(FMLServerStartedEvent event) {
         DamageTracker.instance.resetDamage();
-        FishingTracker.instance.resetFishing();
+        //FishingTracker.instance.resetFishing();
     }
 
     @Mod.EventHandler
     public void serverStopped(FMLServerStoppedEvent event) {
         DamageTracker.instance.resetDamage();
-        FishingTracker.instance.resetFishing();
+        //FishingTracker.instance.resetFishing();
     }
 }

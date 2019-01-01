@@ -22,7 +22,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import vonnie.vonniestest.ModBlocks;
 import vonnie.vonniestest.ModItems;
 import vonnie.vonniestest.generator.DamageTracker;
-import vonnie.vonniestest.generator.FishingTracker;
+//import vonnie.vonniestest.generator.FishingTracker;
 import vonnie.vonniestest.network.Messages;
 import vonnie.vonniestest.vonniestest;
 import vonnie.vonniestest.worldgen.OreGenerator;
@@ -42,7 +42,7 @@ public class CommonProxy {
     public void init(FMLInitializationEvent e) {
         NetworkRegistry.INSTANCE.registerGuiHandler(vonniestest.instance, new GuiHandler());
         MinecraftForge.EVENT_BUS.register(WorldTickHandler.instance);
-        MinecraftForge.EVENT_BUS.register(FishingTracker.instance);
+        //MinecraftForge.EVENT_BUS.register(FishingTracker.instance);
         MinecraftForge.EVENT_BUS.register(DamageTracker.instance);
     }
 
