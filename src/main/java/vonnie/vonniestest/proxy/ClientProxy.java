@@ -19,8 +19,6 @@ import vonnie.vonniestest.ModEntities;
 import vonnie.vonniestest.ModItems;
 import vonnie.vonniestest.vonniestest;
 
-import javax.annotation.Nullable;
-
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
     @Override
