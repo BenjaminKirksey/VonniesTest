@@ -1,6 +1,5 @@
 package vonnie.vonniestest.puzzle;
 
-import vonnie.vonniestest.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -15,6 +14,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import vonnie.vonniestest.ModBlocks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -93,10 +93,7 @@ public class TilePuzzle extends TileEntity implements ITickable {
     };
 
     private void setupGame() {
-        // First find all blocks participating in the game
         Set<BlockPos> gameblocks = findParticipatingBlocks();
-
-        // Pick random items for every pair of blocks
         List<Item> items = Arrays.asList(TilePuzzle.ITEMS);
         Collections.shuffle(items);
 
@@ -127,7 +124,7 @@ public class TilePuzzle extends TileEntity implements ITickable {
                 TileEntity te = world.getTileEntity(todoPos);
                 if (te instanceof TilePuzzle && state.getBlock() == ModBlocks.blockPuzzle && state.getValue(BlockPuzzle.FACING) == thisFacing) {
                     gameblocks.add(todoPos);
-                    // Add connected positions to the to do
+                    // Add connected positions to the todo
                     for (EnumFacing facing : EnumFacing.VALUES) {
                         if (facing.getAxis() != thisFacing.getAxis()) {
                             BlockPos newPos = todoPos.offset(facing);
@@ -154,7 +151,6 @@ public class TilePuzzle extends TileEntity implements ITickable {
         world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 1.0f, 1.0f);
     }
 
-
     private void closeAndSetItem(Item item) {
         closeMe();
         this.item = new ItemStack(item);
@@ -175,7 +171,7 @@ public class TilePuzzle extends TileEntity implements ITickable {
         }
     }
 
-    // Return true if one or more blocks in the set are in display mode (timer > 0)
+    //return true if one or more blocks in the set are in display mode (timer > 0)
     private boolean isDisplayingBadSolution(Set<BlockPos> blocks) {
         for (BlockPos block : blocks) {
             TileEntity te = world.getTileEntity(block);
@@ -187,7 +183,7 @@ public class TilePuzzle extends TileEntity implements ITickable {
         return false;
     }
 
-    // Count all blocks that are not solved and that are currently open
+    //Count all blocks that are not solved and that are currently open
     private int countOpenUnsolvedBlocks(Set<BlockPos> blocks) {
         int cnt = 0;
         for (BlockPos block : blocks) {
@@ -245,31 +241,28 @@ public class TilePuzzle extends TileEntity implements ITickable {
             }
         }
     }
-
-
     public void activate(IBlockState state) {
         Boolean open = state.getValue(BlockPuzzle.OPEN);
         if (open) {
-            // Already open, do nothing
+            //Already open, do nothing
             return;
         }
         if (item.isEmpty()) {
-            // No game, do nothing
+            //No game, do nothing
             return;
         }
-
         Set<BlockPos> blocks = findParticipatingBlocks();
         if (isDisplayingBadSolution(blocks)) {
-            // We are temporarily displaying a bad solution. Do nothing
+            // We are temporarily displaying a bad solution, do nothing
             return;
         }
 
         int cnt = countOpenUnsolvedBlocks(blocks);
         if (cnt == 0) {
-            // We can open
+            //We can open
             openMe();
         } else if (cnt == 1) {
-            // We can also open. Check status
+            //We can also open, check status
             openMe();
             boolean goodsolution = checkSolution(blocks);
             if (goodsolution) {
@@ -280,7 +273,6 @@ public class TilePuzzle extends TileEntity implements ITickable {
                 world.playSound(null, pos, SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.BLOCKS, 1.0f, 1.0f);
             }
         }
-
     }
 
     @Override
@@ -304,7 +296,6 @@ public class TilePuzzle extends TileEntity implements ITickable {
         item = new ItemStack(packet.getNbtCompound().getCompoundTag("item"));
         solved = packet.getNbtCompound().getBoolean("solved");
     }
-
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
